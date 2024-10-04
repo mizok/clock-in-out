@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>員工打卡系統</title>
+  </head>
+  <body>
+    <h1>員工打卡系統</h1>
+    <label for="employeeName">姓名：</label>
+    <input type="text" id="employeeName" />
+    <button id="clockInBtn">打卡</button>
+
+    <script>
+      document
+        .getElementById("clockInBtn")
+        .addEventListener("click", async () => {
+          const employeeName = document.getElementById("employeeName").value;
+          if (employeeName === "") {
+            alert("請輸入姓名");
+            return;
+          }
+          const response = await fetch("/backend", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name: employeeName }),
+          });
+          const result = await response.json();
+          if (result.success) {
+            alert("打卡成功！");
+          } else {
+            alert("打卡失敗，請稍後再試。");
+          }
+        });
+    </script>
+  </body>
+</html>
