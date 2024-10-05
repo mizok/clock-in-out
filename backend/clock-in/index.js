@@ -4,6 +4,7 @@ const { GoogleAuth } = require("google-auth-library");
 
 module.exports = async (req, res) => {
   // 設置 CORS 標頭，允許所有來源進行請求
+  res.setHeader("Access-Control-Allow-Origin", "*"); // 允許所有域名
   res.setHeader("Access-Control-Allow-Methods", "POST");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
